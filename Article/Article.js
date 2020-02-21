@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+      title: 'My Title',
+      date: 'Feb 18, 2020',
+      firstParagraph: `Bacon ipsum dolor amet turducken pig ham shoulder shank venison sausage strip steak beef ribs leberkas pork belly beef chislic tail. Ribeye ball tip tenderloin, ham hock fatback chuck sirloin pork belly venison leberkas frankfurter. Ribeye pancetta cow porchetta tail picanha corned beef. `,
+
+      secondParagraph: `Bacon ipsum dolor amet turducken pig ham shoulder shank venison sausage strip steak beef ribs leberkas pork belly beef chislic tail. Ribeye ball tip tenderloin, ham hock fatback chuck sirloin pork belly venison leberkas frankfurter. Ribeye pancetta cow porchetta tail picanha corned beef. `,
+
+      thirdParagraph: `Bacon ipsum dolor amet turducken pig ham shoulder shank venison sausage strip steak beef ribs leberkas pork belly beef chislic tail. Ribeye ball tip tenderloin, ham hock fatback chuck sirloin pork belly venison leberkas frankfurter. Ribeye pancetta cow porchetta tail picanha corned beef. Bacon ipsum dolor amet turducken pig ham shoulder shank venison sausage strip steak beef ribs leberkas pork belly beef chislic tail. Ribeye ball tip tenderloin, ham hock fatback chuck sirloin pork belly venison leberkas frankfurter. Ribeye pancetta cow porchetta tail picanha corned beef. `,
   }
 ];
 
@@ -112,3 +121,49 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articleComponent = (title, date, firstPara, secondPara, thirdPara) => {
+    const articleCont = document.createElement('div');
+    articleCont.classList.add('article');
+
+    const articleTitle = document.createElement('h2');
+    articleTitle.textContent = title;
+
+    const articleDate = document.createElement('p');
+    articleDate.classList.add('date');
+    articleDate.textContent = date;
+
+    const articleFirstParagraph = document.createElement('p');
+    articleFirstParagraph.textContent = firstPara;
+
+    const articleSecondParagraph = document.createElement('p');
+    articleSecondParagraph.textContent = secondPara;
+
+    const articleThirdParagraph = document.createElement('p');
+    articleThirdParagraph.textContent = thirdPara;
+
+    const expandButton = document.createElement('span');
+    expandButton.classList.add('expandButton');
+    expandButton.textContent = 'expand';
+
+    expandButton.addEventListener('click', (e) => {
+        articleCont.classList.toggle('article-open');
+        expandButton.textContent = (expandButton.textContent === 'expand') ? 'close' : 'expand';
+    });
+
+    articleCont.appendChild(articleTitle);
+    articleCont.appendChild(articleDate);
+    articleCont.appendChild(articleFirstParagraph);
+    articleCont.appendChild(articleSecondParagraph);
+    articleCont.appendChild(articleThirdParagraph);
+    articleCont.appendChild(expandButton);
+
+    return articleCont;
+}
+
+const articles = document.querySelector('.articles');
+
+data.forEach((data) => {
+    const newData = articleComponent(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph);
+    articles.appendChild(newData);
+});
